@@ -1,0 +1,86 @@
+{% extends 'header.html'  %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{% static 'images/hero_bg_1.jpg' %})"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Add Visitor</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                 Add Visitor
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            {% if msg %}
+              <p style="color: green;">{{msg}}</p>
+            {% elif msg1 %}
+              <p style="color: red;">{{msg1}}</p>
+            {% else %}
+              <p style="color: red;"></p>
+            {% endif %}
+            <form action="{% url 'add_visitor' %}" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-6 mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Visitor Name"
+                    name='name'
+                    required
+                  />
+                </div>
+                <div class="col-6 mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Contact"
+                    name='contact'
+                    required
+                  />
+                </div>
+                <div class="col-6 mb-3">
+                  <input
+                    type="submit"
+                    value="Add"
+                    class="btn btn-primary"
+                  />
+                </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <!-- /.untree_co-section -->
+
+{% endblock %}

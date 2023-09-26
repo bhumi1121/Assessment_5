@@ -1,0 +1,108 @@
+{% extends 'header.html'  %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{% static 'images/hero_bg_1.jpg'%})"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Sign Up</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  SingUp
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            
+            <form action="{% url 'signup' %}" method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group">
+                  <div class="col-6 mb-3">
+                    {% if msg %}
+                      <p style="color: green;">{{msg}}</p>
+                    {% elif msg1 %}
+                      <p style="color: red;">{{msg1}}</p>
+                    {% else %}
+                      <p style="color: red;"></p>
+                    {% endif %}
+                  <input type="text" class="form-control" placeholder="Your Name" name='name' required/>
+                </div>
+                <div class="control-group">
+          <input type="email" class="form-control" name="email" 
+          id="email_validation" placeholder="Your Email"
+                                required="required" data-validation-required-message="Please enter your email" />
+                            
+          <span id="email_error" style="color:red;"></span>
+                            
+        </div>
+
+                   <div class="col-6 mb-3">
+                  <input type="text" class="form-control" placeholder="Password" name='pswd' required/>
+                </div>
+
+                  <div class="col-6 mb-3">
+                  <input type="text" class="form-control" placeholder="Confirm password" name='cpswd' required/>
+                </div>
+               
+                <div class="col-12">
+                  <input type="submit" value="submit" class="btn btn-primary"/>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.untree_co-section -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+        
+          $("#email_validation").change(function(){
+            var email=$(this).val();
+
+            $.ajax({
+              url: '/ajax/e_verify/',
+              data: {'email':email},
+              datatype: 'json',
+              success: function (data){
+                if (data.is_taken) {
+                  document.getElementById("email_error").innerHTML="This Email ID is Already Exist"
+                }
+                else{
+                  
+                  /*Nothing to do just normal course of program*/
+                }
+              }
+            });
+          });
+
+      </script>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{% static 'images/hero_bg_1.jpg' %}')"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">chairman</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  chairman
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      {% for n in chairman %}
+        <div class="col-sm-6 col-md-4 col-lg-4">
+          <div class="box">
+            <div class="option_container">
+              <div class="options">
+                
+                <a href="{% url 'delete_chairman' pk=n.pk %}" class="option2">
+                  Delete
+                </a>
+              </div>
+            </div>
+            <div class="img-box">
+              <img src="{{n.c_image.url}}" alt="">
+            </div>
+            <div class="detail-box">
+              <h5>
+                {{n.c_name}} {{n.c_contact}}
+              </h5>
+              <h6>
+              </h6>
+            </div>
+          </div>
+        </div>  
+
+      {% endfor %}           
+    </div>
+
+  {% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'header.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div
+      class="hero page-inner overlay"
+      style="background-image: url('{% static 'images/hero_bg_1.jpg' %}')"
+    >
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-lg-9 text-center mt-5">
+            <h1 class="heading" data-aos="fade-up">Visitor</h1>
+
+            <nav
+              aria-label="breadcrumb"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <ol class="breadcrumb text-center justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li
+                  class="breadcrumb-item active text-white-50"
+                  aria-current="page"
+                >
+                  Visitor
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      {% for k in visitor %}
+        <div class="col-sm-6 col-md-4 col-lg-4">
+          <div class="box">
+            <div class="option_container">
+              <div class="options">
+                
+                <a href="{% url 'delete_visitor' pk=k.pk %}" class="option2">
+                  Delete
+                </a>
+              </div>
+            </div>
+            <div class="detail-box">
+              <h5>
+                {{k.contact}} - {{k.name}}
+              </h5>
+            </div>
+          </div>
+        </div>  
+
+      {% endfor %}           
+    </div>
+
+  {% endblock %}
